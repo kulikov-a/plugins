@@ -144,14 +144,14 @@
     <label>SSL Ciphers</label>
     <type>text</type>
     <advanced>true</advanced>
-    <help>Specify enabled ciphers. The ciphers are specified in the format understood by the OpenSSL library. Example: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256. Default: ECDHE-ECDSA-CAMELLIA256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-CAMELLIA256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-CAMELLIA128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-CAMELLIA128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-CAMELLIA256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-CAMELLIA256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-CAMELLIA128-SHA256:ECDHE-RSA-AES128-SHA256.</help>
+    <help>Specify enabled ciphers. The ciphers are specified in the format understood by the OpenSSL library. Example: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256.</help>
   </field>
   <field>
     <id>httpserver.ssl_prefer_server_ciphers</id>
     <label>Prefer server ciphers</label>
     <type>checkbox</type>
     <advanced>true</advanced>
-    <help>Sets that server ciphers should be preferred over client ciphers.</help>
+    <help>Prefers server ciphers over client ciphers.</help>
   </field>
   <field>
     <id>httpserver.ocsp_stapling</id>
