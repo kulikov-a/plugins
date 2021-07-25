@@ -144,7 +144,7 @@
     <label>SSL Ciphers</label>
     <type>text</type>
     <advanced>true</advanced>
-    <help>Specify enabled ciphers. The ciphers are specified in the format understood by the OpenSSL library. Example: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256.</help>
+    <help>Specify enabled ciphers. The ciphers are specified in the format understood by the OpenSSL library. Example: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256. NGINX default (empty field): HIGH:!aNULL:!MD5.</help>
   </field>
   <field>
     <id>httpserver.ssl_prefer_server_ciphers</id>
