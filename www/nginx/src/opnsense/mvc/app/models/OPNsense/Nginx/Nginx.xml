@@ -782,7 +782,7 @@
           <TLSv1_3 value="TLSv1.3">TLSv1.3</TLSv1_3>
         </OptionValues>
         <Required>N</Required>
-        <default>TLSv1.2 TLSv1.3</default>
+        <default>TLSv1.2,TLSv1.3</default>
         <Required>N</Required>
       </ssl_protocols>
       <ssl_ciphers type="TextField">
