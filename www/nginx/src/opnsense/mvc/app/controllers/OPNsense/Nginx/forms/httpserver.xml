@@ -135,9 +135,10 @@
   <field>
     <id>httpserver.ssl_protocols</id>
     <label>SSL Protocols</label>
-    <type>text</type>
+    <style>selectpicker</style>
+    <type>select_multiple</type>
     <advanced>true</advanced>
-    <help>Enable specified protocols. Example: TLSv1 TLSv1.1 TLSv1.2. Default: TLSv1.2 TLSv1.3.</help>
+    <help>Enable specified protocols. Default: TLSv1.2 TLSv1.3.</help>
   </field> 
   <field>
     <id>httpserver.ssl_ciphers</id>
