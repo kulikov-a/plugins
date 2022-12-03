@@ -132,8 +132,44 @@
         <FieldSeparator>,</FieldSeparator>
         <asList>Y</asList>
       </nameserver>
+      <log_level type="OptionField">
+        <multiple>N</multiple>
+        <OptionValues>
+          <error value="error">Error</error>
+          <warning value="warning">Warning</warning>
+          <notice value="notice">Notice</notice>
+          <info value="info">Informational (default)</info>
+          <debug value="debug">Debug</debug>
+        </OptionValues>
+        <Required>Y</Required>
+        <default>info</default>
+      </log_level>
     </general>
 
+    <controller>
+      <bind_socket type="CSVListField">
+        <Required>N</Required>
+        <default>127.0.0.1:11334,[::1]:11334</default>
+        <multiple>Y</multiple>
+        <mask>/^((([0-9a-zA-Z._\-\*:\[\]]+:+[0-9]+(-[0-9]+)?|unix@[0-9a-z_\-]+)([,]){0,1}))*/u</mask>
+        <ChangeCase>lower</ChangeCase>
+        <ValidationMessage>Please provide a valid listen address, i.e. 127.0.0.1:8080, [::1]:8080, www.example.com:443 or unix@socket-name. Port range as start-end, i.e. 127.0.0.1:1220-1240.</ValidationMessage>
+      </bind_socket>
+      <secure_ip type="CSVListField">
+        <Required>N</Required>
+        <default>127.0.0.1,[::1]</default>
+        <multiple>Y</multiple>
+        <mask>/^((([0-9a-zA-Z._\-\*)?|unix@[0-9a-z_\-]+)([,]){0,1}))*/u</mask>
+        <ChangeCase>lower</ChangeCase>
+        <ValidationMessage>Please provide a valid listen address, i.e. 127.0.0.1:8080, [::1]:8080, www.example.com:443 or unix@socket-name. Port range as start-end, i.e. 127.0.0.1:1220-1240.</ValidationMessage>
+      </secure_ip>
+      <password type="TextField">
+        <Required>N</Required>
+      </password>
+      <enable_password type="TextField">
+        <Required>N</Required>
+      </enable_password>
+    </controller>
     <milter_headers>
       <enabled type="BooleanField">
         <default>0</default>

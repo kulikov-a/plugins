@@ -1,5 +1,9 @@
 <menu>
   <Services>
-    <Rspamd cssClass="fa fa-envelope fa-fw" url="/ui/rspamd" />
+    <Rspamd cssClass="fa fa-envelope fa-fw">
+      <Configuration order="10" url="/ui/rspamd"/>
+      <LogFile VisibleName="Log File" order="20" url="/ui/diagnostics/log/core/rspamd"/>
+   </Rspamd>
   </Services>
 </menu>
+
