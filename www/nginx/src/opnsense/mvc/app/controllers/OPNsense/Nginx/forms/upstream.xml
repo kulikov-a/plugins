@@ -24,6 +24,13 @@
     <help>If you enable the proxy protocol, an upstream proxy or server will get the client IP and the server port before the real traffic is sent.</help>
   </field>
   <field>
+    <id>upstream.host_port</id>
+    <label>Host headers port</label>
+    <type>text</type>
+    <advanced>true</advanced>
+    <help>Add this port value to the headers with $host variable. Not used by default.</help>
+  </field>
+  <field>
     <id>upstream.tls_enable</id>
     <label>Enable TLS (HTTPS)</label>
     <help>Use TLS (HTTPS) to connect to the server.</help>
