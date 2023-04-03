@@ -120,6 +120,18 @@
         <BlankDesc>Weighted Round Robin</BlankDesc>
         <Required>N</Required>
       </load_balancing_algorithm>
+      <keepalive type="IntegerField">
+        <MinimumValue>0</MinimumValue>
+        <Required>N</Required>
+      </keepalive>
+      <keepalive_requests type="IntegerField">
+        <MinimumValue>1</MinimumValue>
+        <Required>N</Required>
+      </keepalive_requests>
+      <keepalive_timeout type="IntegerField">
+        <MinimumValue>1</MinimumValue>
+        <Required>N</Required>
+      </keepalive_timeout>
       <host_port type="IntegerField">
         <MinimumValue>1</MinimumValue>
         <Required>N</Required>
