@@ -105,7 +105,7 @@ class SettingsController extends ApiMutableModelControllerBase
     // Upstream
     public function searchupstreamAction()
     {
-        return $this->searchBase('upstream', array('description', 'serverentries', 'tls_enable', 'load_balancing_algorithm'));
+        return $this->searchBase('upstream', array('uuid', 'description', 'serverentries', 'tls_enable', 'load_balancing_algorithm'));
     }
 
     public function getupstreamAction($uuid = null)
@@ -132,7 +132,7 @@ class SettingsController extends ApiMutableModelControllerBase
     // Upstream Server
     public function searchupstreamserverAction()
     {
-        return $this->searchBase('upstream_server', array('description', 'server', 'port', 'priority'));
+        return $this->searchBase('upstream_server', array('uuid', 'description', 'server', 'port', 'priority'));
     }
 
     public function getupstreamserverAction($uuid = null)
@@ -161,7 +161,7 @@ class SettingsController extends ApiMutableModelControllerBase
     {
         $data = $this->searchBase('location', array(
             'description','urlpattern', 'path_prefix', 'matchtype', 'upstream',
-            'enable_secrules', 'enable_learning_mode', 'force_https',
+            'enable_secrules', 'enable_learning_mode', 'force_https', 'uuid',
             'xss_block_score', 'sqli_block_score', 'custom_policy'
         ));
 
@@ -817,5 +817,12 @@ class SettingsController extends ApiMutableModelControllerBase
     public function setsyslogTargetAction($uuid)
     {
         return $this->setBase('syslog_target', 'syslog_target', $uuid);
+    }
+
+    public function dumpconfigAction()
+    {
+        $backend = new Backend();
+        $response = trim($backend->configdRun("nginx show_config"));
+        return array("response" => $response);
     }
 }
