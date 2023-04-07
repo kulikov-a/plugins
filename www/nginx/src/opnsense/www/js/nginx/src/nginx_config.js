@@ -82,11 +82,17 @@ function init_grids() {
                 'options': {
                     selection: false,
                     multiSelect: false,
+                    commands: {
+                       copy_uuid: {
+                           method: function(colum, row) { navigator.clipboard.writeText($(this).data("row-id")); }
+                        }
+                    },
                     formatters: {
                         "commands": function (column, row) {
                             return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.uuid + "\"><span class=\"fa fa-pencil\"></span></button> " +
                                 "<button type=\"button\" class=\"btn btn-xs btn-default command-copy\" data-row-id=\"" + row.uuid + "\"><span class=\"fa fa-clone\"></span></button>" +
-                                "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.uuid + "\"><span class=\"fa fa-trash-o\"></span></button>";
+                                "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.uuid + "\"><span class=\"fa fa-trash-o\"></span></button>" +
+                                "<button type=\"button\" class=\"btn btn-xs btn-default bootgrid-tooltip command-copy_uuid\" data-row-id=\"" + row.uuid + "\" title=\"Copy UUID to clipboard\"><span class=\"fa fa-clipboard\"></span></button>";
                         },
                         "response": function (column, row) {
                             return ((row.response == "none") ? "unchanged" : row.response);
