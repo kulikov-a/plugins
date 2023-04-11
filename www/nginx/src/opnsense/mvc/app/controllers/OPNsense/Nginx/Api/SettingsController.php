@@ -160,8 +160,8 @@ class SettingsController extends ApiMutableModelControllerBase
     public function searchlocationAction()
     {
         $data = $this->searchBase('location', array(
-            'description','urlpattern', 'path_prefix', 'matchtype', 'upstream',
-            'enable_secrules', 'enable_learning_mode', 'force_https', 'uuid',
+            'uuid', 'description', 'urlpattern', 'path_prefix', 'matchtype',
+            'upstream', 'enable_secrules', 'enable_learning_mode', 'force_https',
             'xss_block_score', 'sqli_block_score', 'custom_policy'
         ));
 
@@ -233,7 +233,7 @@ class SettingsController extends ApiMutableModelControllerBase
     public function searchhttpserverAction()
     {
         return $this->searchBase('http_server', array(
-            'servername', 'locations', 'root', 'https_only', 'certificate',
+            'uuid', 'servername', 'locations', 'root', 'https_only', 'certificate',
             'listen_http_address', 'listen_https_address', 'default_server'
         ));
     }
@@ -262,7 +262,7 @@ class SettingsController extends ApiMutableModelControllerBase
     // stream server
     public function searchstreamserverAction()
     {
-        return $this->searchBase('stream_server', array('description', 'certificate', 'udp', 'listen_address'));
+        return $this->searchBase('stream_server', array('uuid', 'description', 'certificate', 'udp', 'listen_address'));
     }
 
     public function getstreamserverAction($uuid = null)
@@ -817,12 +817,5 @@ class SettingsController extends ApiMutableModelControllerBase
     public function setsyslogTargetAction($uuid)
     {
         return $this->setBase('syslog_target', 'syslog_target', $uuid);
-    }
-
-    public function dumpconfigAction()
-    {
-        $backend = new Backend();
-        $response = trim($backend->configdRun("nginx show_config"));
-        return array("response" => $response);
     }
 }
