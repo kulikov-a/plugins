@@ -57,11 +57,41 @@
     }
 
     function ngnx_show_conf() {
-        ajaxCall(url="/api/nginx/settings/dumpconfig/", sendData={}, callback=function(data,status) {
+        ajaxCall(url="/api/nginx/settings/showconfig/", sendData={}, callback=function(data,status) {
             if (data['response'] && data['response'].trim()) {
                   $("#nginx_conf").html(data['response']);
             } else {
                   $("#nginx_conf").html('nothing to show');
+            }
+        });
+    }
+
+    function ngnx_test_conf() {
+        ajaxCall(url="/api/nginx/settings/testconfig/", sendData={}, callback=function(data,status) {
+            if (data['response'].indexOf('test failed') > -1) {
+                 BootstrapDialog.show({
+                    type: BootstrapDialog.TYPE_DANGER,
+                    title: "NGINX config test failed",
+                    message: data['response'],
+                    buttons: [{
+                        label: 'Ok',
+                        action: function(dlg){
+                             dlg.close();
+                        }
+                    }]
+                });
+            } else {
+                 BootstrapDialog.show({
+                    type: BootstrapDialog.TYPE_INFO,
+                    title: "NGINX config test is successful",
+                    message: "NGINX config test is successful",
+                    buttons: [{
+                        label: 'Ok',
+                        action: function(dlg){
+                             dlg.close();
+                        }
+                    }]
+                });
             }
         });
     }

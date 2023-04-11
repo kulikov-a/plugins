@@ -17,7 +17,7 @@ def load_config_file(config_path):
     # mimic 'nginx -T' syntax for config files references
     nginx_config.append('# configuration file ' + config_path + ':')
     for line in open(config_path, 'r').read().split('\n'):
-        line = line.strip()
+        line = line.rstrip()
         nginx_config.append(line)
         if line.startswith('include '):
             # only '*' mask is supported/used in plugin
