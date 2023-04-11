@@ -10,6 +10,17 @@ WWW: https://nginx.org/
 Plugin Changelog
 ================
 
+1.33
+
+* allow to disable Infrastructure mode (allows to completely disable nginx)
+* add Show and Test config support to GUI
+* add $http_host variable support in proxy_set_header X-Forwarded-Host header
+* add custom port support in proxy_set_header Host header
+* add Upstream keepalive support
+* add gzip disabling support on the server level
+* add uuid column and Copy UUID to clipboard button to the grids
+* handle possible unlinked VTS socket after the nginx start failure
+
 1.32
 
 * add support for resetting timed out connections and 444 responses (reset_timedout_connection)
