@@ -822,8 +822,8 @@ class SettingsController extends ApiMutableModelControllerBase
     public function showconfigAction()
     {
         $backend = new Backend();
-        $response = trim($backend->configdRun("nginx show_config"));
-        return array("response" => $response);
+        $response = json_decode($backend->configdRun("nginx show_config"), true);
+        return $response;
     }
 
     public function testconfigAction()

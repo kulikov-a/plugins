@@ -5,7 +5,9 @@
 
 import os.path
 import glob
+import ujson
 
+result = dict()
 nginx_config = []
 nginx_config_root = '/usr/local/etc/nginx/'
 nginx_config_file = nginx_config_root + 'nginx.conf'
@@ -17,8 +19,8 @@ def load_config_file(config_path):
     # mimic 'nginx -T' syntax for config files references
     nginx_config.append('# configuration file ' + config_path + ':')
     for line in open(config_path, 'r').read().split('\n'):
-        line = line.rstrip()
-        nginx_config.append(line)
+        nginx_config.append(line.rstrip())
+        line = line.strip()
         if line.startswith('include '):
             # only '*' mask is supported/used in plugin
             if '*' not in line:
@@ -34,6 +36,9 @@ def load_config_file(config_path):
     for inc in list(dict.fromkeys(config_incs)):
         load_config_file(inc)
 
-load_config_file(nginx_config_file)
-for line in nginx_config:
-    print (line)
+if os.path.isfile(nginx_config_file):
+    result['time'] = os.path.getmtime(nginx_config_file)
+    load_config_file(nginx_config_file)
+    result['config'] = nginx_config
+print(ujson.dumps(result))
+

@@ -57,11 +57,25 @@
     }
 
     function ngnx_show_conf() {
+        $("#nginx_conf").html('Nginx config will be shown here');
+        $("#config_help_text").hide();
         ajaxCall(url="/api/nginx/settings/showconfig/", sendData={}, callback=function(data,status) {
-            if (data['response'] && data['response'].trim()) {
-                  $("#nginx_conf").html(data['response']);
+            if (data['time'] && data['config']) {
+                $("#nginx_conf").html(data['config'].join('\n'));
+                $("#config_help_text").show();
+                BootstrapDialog.show({
+                   type: BootstrapDialog.TYPE_INFO,
+                   title: "NGINX config loaded successfully",
+                   message: "NGINX config loaded. Config file created at: " + moment.unix(data['time']).local().format('YYYY-MM-DD HH:mm:ss'),
+                   buttons: [{
+                       label: 'Ok',
+                       action: function(dlg){
+                           dlg.close();
+                       }
+                   }]
+                });
             } else {
-                  $("#nginx_conf").html('nothing to show');
+                  $("#nginx_conf").html('Empty response from the backend. Please check logs.');
             }
         });
     }
@@ -112,6 +126,7 @@
 <script src="{{ cache_safe('/ui/js/nginx/lib/lodash.min.js') }}"></script>
 <script src="{{ cache_safe('/ui/js/nginx/lib/backbone-min.js') }}"></script>
 <script src="{{ cache_safe('/ui/js/nginx/dist/configuration.min.js') }}"></script>
+<script src="{{ cache_safe('/ui/js/moment-with-locales.min.js') }}"></script>
 <style>
     #frm_sni_hostname_mapdlg .col-md-4,
     #frm_ipacl_dlg .col-md-4 {
@@ -751,21 +766,25 @@
             </tfoot>
         </table>
     </div>
-
-
     <div id="subtab_nginx-other-config-dump" class="tab-pane fade">
         <div id="nginx_conf_container" class="table-responsive">
             <textarea name="conf_output" id="nginx_conf" class="form-control" rows="20" wrap="hard" readonly="readonly" style="max-width:100%; font-family: monospace; cursor: text;"></textarea>
-                <table class="table table-striped table-condensed">
-                    <tbody>
-                        <tr>
-                            <td>
-                              {{ lang._('This is not a running config dump or config generated from OPNSense config file. This is a config that nginx will try to load next time.') }}
-                              <a id="nginx_config_copy">{{ lang._('Click here to copy to clipboard.') }}</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table class="table table-striped table-condensed">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div id="config_help_text" style="display:none">
+                                {{ lang._('Configuration from files on disk is shown (not from running process memory or from OPNSense config).') }}
+                                <a id="nginx_config_copy">{{ lang._('Click here to copy to clipboard.') }}</a>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" id="conf_show_btn" data-type="config" type="button"><b>{{ lang._('Show Config') }}</b></button>
+                                <button class="btn btn-primary" id="conf_test_btn" data-type="test" type="button"><b>{{ lang._('Test Config') }}</b></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
