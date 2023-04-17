@@ -14,7 +14,7 @@ Plugin Changelog
 
 * allow to disable Infrastructure mode (allows to completely disable nginx)
 * add bot UAs list to GUI
-* add Show and Test config support to GUI
+* add Config Preview tab with config show\test\copy support
 * add $http_host variable support in proxy_set_header X-Forwarded-Host header
 * add custom port support in proxy_set_header Host header
 * add Upstream keepalive support
