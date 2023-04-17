@@ -15,12 +15,13 @@ Plugin Changelog
 * allow to disable Infrastructure mode (allows to completely disable nginx)
 * add bot UAs list to GUI
 * add Config Preview tab with config show\test\copy support
-* add $http_host variable support in proxy_set_header X-Forwarded-Host header
-* add custom port support in proxy_set_header Host header
+?* add $http_host variable support in proxy_set_header X-Forwarded-Host header
+?* add custom port support in proxy_set_header Host header
 * add Upstream keepalive support
 * add gzip disabling support on the server level
-* add uuid column and Copy UUID to clipboard button to the grids
-* handle possible unlinked VTS socket after the nginx start failure
+* compact result config a bit by removing extra newlines
+?* add uuid column and Copy UUID to clipboard button to the grids
+?* handle possible unlinked VTS socket after the nginx start failure
 
 1.32
 
