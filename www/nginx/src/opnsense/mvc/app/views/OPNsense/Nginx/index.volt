@@ -61,17 +61,17 @@
 
     function ngnx_show_conf() {
 
-        $("#nginx_conf tbody").empty().append("<tr><td>{{ lang._('Waiting for response..') }}</td></tr>");
+        $("#nginx_conf tbody").empty().append('<tr><td class="placeholdertd">{{ lang._("Waiting for response..") }}</td></tr>');
         $("#config_help_text").hide();
         ajaxCall(url="/api/nginx/settings/showconfig/", sendData={}, callback=function(data,status) {
             if (data['time'] && data['config']) {
                 var L = 0;
-                var content = '';
+                var content = [];
                 $.each(data['config'], function(index, line) {
                     L = line.indexOf('# configuration file ') > -1 ? 0 : L + 1;
-                    content += '<tr><td class="l-number">' + L.toString() + '</td><td class="config-line"><span>' + line + '</span></td></tr>';
+                    content.push('<tr><td class="l-number">' + L.toString() + '</td><td class="config-line"><span>' + line + '</span></td></tr>');
                 });
-                $("#nginx_conf tbody").empty().append(content);
+                $("#nginx_conf tbody").empty().append(content.join());
                 $("#config_help_text").show();
                 BootstrapDialog.show({
                    type: BootstrapDialog.TYPE_INFO,
@@ -122,13 +122,16 @@
 
     $( document ).ready(function() {
         $("#nginx_config_copy").click(function () {
-            $("#nginx_conf").select();
-            document.execCommand("copy");
-            document.getSelection().removeAllRanges();
-            setTimeout(function () { $("#nginx_conf").blur(); }, 1000);
+            $(this).fadeOut();
+            let conf_to_clipboard = [];
+            $('.config-line').each(function() {
+                conf_to_clipboard.push($(this).text())
+            });
+            navigator.clipboard.writeText(conf_to_clipboard.join('\n'));
+            $(this).fadeIn();
         });
-        $("#subtab_item_nginx-other-config-dump").click(function () {
-            $("#nginx_conf tbody").empty().append("<tr><td>{{ lang._(placeholder_txt) }}</td></tr>");
+        $("#subtab_item_nginx-other-config-preview").click(function () {
+            $("#nginx_conf tbody").empty().append('<tr><td class="placeholdertd">{{ lang._(placeholder_txt) }}</td></tr>');
         });
 
         $("#conf_show_btn").click(function () {
@@ -172,10 +175,12 @@
     .filter-option {
         padding: inherit !important;
     }
+    #nginx_conf_container {
+        overflow-x: auto;
+    }
     .ngx_conf_table {
         white-space: pre-wrap;
-        background-color: #eeee;
-        font-family: ui-monospace,monospace;
+        word-break: break-word;
     }
     .ngx_conf_table_body {
         display: grid;
@@ -192,9 +197,15 @@
         text-align: right;
         white-space: nowrap;
         vertical-align: top;
-        cursor: pointer;
-        -webkit-user-select: none;
         user-select: none;
+        filter: brightness(2.0);
+        filter: contrast(0.3);
+    }
+    .placeholdertd {
+        padding: 10px;
+    }
+    #nginx_config_copy {
+        cursor: pointer;
     }
 </style>
 
@@ -321,7 +332,7 @@
                 <a data-toggle="tab" id="subtab_item_nginx-other-syslog-target" href="#subtab_nginx-other-syslog-target">{{ lang._('SYSLOG Targets')}}</a>
             </li>
             <li>
-                <a data-toggle="tab" id="subtab_item_nginx-other-config-dump" href="#subtab_nginx-other-config-dump">{{ lang._('Config Preview')}}</a>
+                <a data-toggle="tab" id="subtab_item_nginx-other-config-preview" href="#subtab_nginx-other-config-preview">{{ lang._('Config Preview')}}</a>
             </li>
         </ul>
     </li>
@@ -805,15 +816,11 @@
             </tfoot>
         </table>
     </div>
-    <div id="subtab_nginx-other-config-dump" class="tab-pane fade">
-        <div id="nginx_conf_container" class="table-responsive">
-            <!--
-            <textarea name="conf_output" id="nginx_conf" class="form-control" rows="20" wrap="hard" readonly="readonly" style="max-width:100%; font-family: monospace; cursor: text;"></textarea>
-            -->
-            <table class="ngx_conf_table" id="nginx_conf">
-                <tbody class="ngx_conf_table_body">
-                </tbody>
-            </table>
+    <div id="subtab_nginx-other-config-preview" class="tab-pane fade">
+        <div id="nginx_conf_container" class="nginx_table_responsive">
+            <pre style="margin: 0 0 0;"><table class="ngx_conf_table" id="nginx_conf">
+                <tbody class="ngx_conf_table_body"></tbody>
+            </table></pre>
             <table class="table table-striped table-condensed">
                 <tbody>
                     <tr>
@@ -833,7 +840,6 @@
         </div>
     </div>
 </div>
-
 
 {{ partial("layout_partials/base_dialog",['fields': upstream,'id':'upstreamdlg', 'label':lang._('Edit Upstream')]) }}
 {{ partial("layout_partials/base_dialog",['fields': upstream_server,'id':'upstreamserverdlg', 'label':lang._('Edit Upstream')]) }}
