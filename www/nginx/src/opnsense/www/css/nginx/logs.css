@@ -27,6 +27,7 @@
 thead.sticky-top th {
     position: sticky;
     top: 80px;
+    background: white;
 }
 
 thead.sticky-top tr:first-child th {
@@ -38,4 +39,8 @@ tfoot.sticky-bottom th {
     bottom: 50px;
     font-weight: normal;
     font-family: inherit;
+}
+
+td.referer, td.request_line {
+   word-break: break-all;
 }
