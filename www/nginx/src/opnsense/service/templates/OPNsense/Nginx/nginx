@@ -1,2 +1,8 @@
 nginx_setup="/usr/local/opnsense/scripts/nginx/setup.php"
+{% if helpers.exists('OPNsense.Nginx.general.enabled') and OPNsense.Nginx.general.enabled|default("0") == "1" %}
 nginx_enable="YES"
+{% elif helpers.exists('OPNsense.Nginx.general.no_inframode') and OPNsense.Nginx.general.no_inframode|default("0") == "1" %}
+nginx_enable="NO"
+{% else %}
+nginx_enable="YES"
+{% endif %}
