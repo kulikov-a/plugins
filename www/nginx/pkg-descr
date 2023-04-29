@@ -18,6 +18,7 @@ Plugin Changelog
 * add Config Preview tab with config show\test\copy support
 * add Upstream keepalive support
 * add gzip disabling support on the server level
+* convert timestamps to local time in Banned grid
 * compact result config a bit by removing extra newlines
 
 1.32
