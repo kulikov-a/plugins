@@ -13,6 +13,7 @@ Plugin Changelog
 1.33
 
 * NOT READY allow to disable Infrastructure mode (allows to completely disable nginx)
+* DISCUSS: add X-Robots-Tag checkbox at server level
 * add autoban access log to GUI
 * add bot UAs list to GUI
 * add Config Preview tab with config show\test\copy support
