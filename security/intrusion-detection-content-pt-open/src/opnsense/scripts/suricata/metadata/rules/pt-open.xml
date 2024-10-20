@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset documentation_url="https://rules.ptsecurity.com/">
+    <location url="https://rules.ptsecurity.com/files/ptopen.rules.tar.gz" prefix="PT open"/>
+    <files>
+        <file description="attacks" url="inline::rules/ptopen-attacks.rules">ptopen-attacks.rules</file>
+        <file description="windows" url="inline::rules/ptopen-windows.rules">ptopen-windows.rules</file>
+        <file description="tools" url="inline::rules/ptopen-tools.rules">ptopen-tools.rules</file>
+        <file description="malware" url="inline::rules/ptopen-malware.rules">ptopen-malware.rules</file>
+    </files>
+</ruleset>
