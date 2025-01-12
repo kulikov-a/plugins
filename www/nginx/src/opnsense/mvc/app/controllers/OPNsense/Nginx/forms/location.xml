@@ -328,4 +328,12 @@
     <type>select_multiple</type>
     <help>Select custom error pages to display instead of the default builtin error pages. Selection will override error pages configured on HTTP server.</help>
   </field>
+  <field>
+    <id>location.proxy_intercept_errors</id>
+    <label>Intercept errors</label>
+    <type>dropdown</type>
+    <style>selectpicker</style>
+    <help>Intercept responses with codes greater than or equal to 300 and redirect to processing with custom error pages.</help>
+    <advanced>true</advanced>
+  </field>
 </form>
