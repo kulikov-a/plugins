@@ -166,6 +166,13 @@
     <help>If the request scheme is not HTTPS, redirect to use HTTPS for this server.</help>
   </field>
   <field>
+    <id>httpserver.http2</id>
+    <label>HTTP/2</label>
+    <type>checkbox</type>
+    <help>Enable the HTTP/2 protocol.</help>
+    <advanced>true</advanced>
+  </field>
+  <field>
     <id>httpserver.tls_protocols</id>
     <label>TLS Protocols</label>
     <style>selectpicker</style>
